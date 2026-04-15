@@ -1,9 +1,72 @@
 document.addEventListener('DOMContentLoaded', () => {
+    /* ============================
+     =  SPLASH + BOOT SEQUENCE  =
+     ============================ */
+
+  const splash = document.getElementById("splash");
+  const enterBtn = document.getElementById("enterSite");
+  const bootLines = document.querySelectorAll(".boot-line");
+  const splashTitle = document.getElementById("splashTitle");
+  const splashSub = document.querySelector(".splash-sub");
+
+  if (splash && enterBtn) {
+
+    if (localStorage.getItem("visited")) {
+      splash.style.display = "none";
+    } else {
+      let delay = 0;
+
+      bootLines.forEach((line) => {
+        setTimeout(() => {
+          line.style.opacity = 1;
+          line.style.animation = "typing 1s steps(20, end)";
+        }, delay);
+        delay += 700;
+      });
+
+      setTimeout(() => {
+        splashTitle.style.display = "block";
+        splashSub.style.display = "block";
+        enterBtn.classList.remove("hidden");
+      }, delay + 500);
+    }
+
+    enterBtn.addEventListener("click", () => {
+      splash.classList.add("fade-out");
+
+      setTimeout(() => {
+        splash.style.display = "none";
+      }, 800);
+
+      localStorage.setItem("visited", "true");
+    });
+  }
+  const glitchTargets = document.querySelectorAll(
+  ".title, .gallery-section h2, .avatar-wrap h3, header p"
+);
+
+glitchTargets.forEach(el => el.classList.add("glitch"));
   /* ============================
      =  DEFAULT EMBEDDED POSTS   =
      ============================ */
   const posts = [
     {
+      id: 'p-9.20.25',
+      title: '9.20.25',
+      date: '9.20.25',
+      mood: 'wistful 🌙',
+      song: 'Self Love (with Ari Lennox & Bas feat. Baby Rose) - Dreamville',
+      snippet:'this project is an online space imagined as...',
+      content: `
+      <p> This project is an online space imagined as a diary, a mixtape, and a scrapbook—an ode to Black girlhood, whimsy, and softness. It brings together fragments of memory, emotion, and digital culture to create an immersive environment that honors femininity, self-definition, and interior life beyond struggle-centered narratives. Rather than focusing on survival alone, this work leans into joy, curiosity, and the quiet, often overlooked moments that shape who we are.</p>
+     <p>This space functions as both a personal sanctuary and a speculative archive—one that reclaims intimacy, play, and imagination as essential parts of Black girlhood, and in turn, Black womanhood. It resists the pressure to be legible or palatable, instead allowing room for contradiction, vulnerability, and becoming. Through layered visuals, text, and sound, it mimics the feeling of scrolling through memories—both real and imagined—blurring the line between past and present, public and private.</p>
+     <p> It is a place to remember, reflect, and remix the many ways we’ve always existed online and offline: through usernames, playlists, inside jokes, aesthetics, and fleeting posts that still hold meaning. Ultimately, this project is about holding space—for softness without apology, for complexity without explanation, and for the beauty of simply being.</p>
+      `,
+     audio: 'SpotiDown.App - Self Love _with Ari Lennox _ Bas feat. Baby Rose_ - Dreamville.mp3',
+      image: 'ari.png'
+    },
+    {
+
       id: 'p-92925',
       title: '9.29.25',
       date: '9.29.25',
@@ -11,12 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
       song: 'Let Me Be Great [Feat. Angélique Kidjo] - Sampa the Great',
       snippet: 'Growing up online felt like living in two worlds...',
       content: `
-       <p>idk, sometimes i think about how weird it was growing up online like half of me lived on myspace, youtube, and early tumblr, and the other half was just trying to figure out who i was in real life.</p>
+       <p>thinking about spaces like the tumblr account Black Girl Problems, it really captures this feeling that black girls have always had to be aware of how we’re being read. like even in moments that are supposed to be light or funny, there’s this underlying knowing—of being watched, misunderstood, or needing to soften certain parts of yourself just to be received a certain way.
         <p>i’d scroll for hours looking for girls who looked like me, or at least felt like me awkward, funny, a little dramatic, still figuring it out.</p>
-        <p>i remember stumbling across <em>The Misadventures of Awkward Black Girl</em> on youtube, and honestly? it changed something in me. seeing Issa Rae just… exist. she wasn’t performing “black excellence” or trying to be perfect she was just awkward and hilarious and human. it felt like someone finally cracked the screen open and said, “you can be seen like this too.”</p>
-        <p>that was also around the same time as those tumblr accounts like <em>Black Girl Problems</em>, which somehow managed to be both funny and heartbreaking. like one post would make you laugh out loud “when you spend three hours straightening your hair and it rains five minutes later 😭” and the next would remind you of the quiet weight that comes with being seen as “too loud,” “too grown,” or “too different.”</p>
-        <p>when i think about those moments now, i realize that so much of early internet culture for black girls was about finding a mirror that reflected back more than stereotypes. it was us building community in comment sections, sharing survival tips in reblogs, remixing ourselves into existence.</p>
-        <p>that’s kinda what this space is for too a mix of memory, media, and the messy in-between. the parts of black girlhood that don’t always make it into the highlight reel.</p>
+        <p>a lot of those posts felt like inside jokes, but also tiny confessions. things about code-switching, about being “too much” or “not enough” at the same time, about shrinking yourself in certain spaces and then trying to stretch back out when you’re alone or with people who get it. it wasn’t always said directly, but you could feel it in the tone—in the humor, the sarcasm, the repetition.
+        <p>it reflects how palatability isn’t just something external, it kind of seeps into your inner world too. you start to question how you come across, how your emotions are perceived, how your softness or your anger might be read before you even get to fully feel it. and over time, that awareness becomes second nature.
+        <p>but at the same time, spaces like that also created a kind of release. like even if you’re adjusting yourself out in the world, you could log on and see someone say the exact thing you were thinking but didn’t have words for. it made room for honesty in a way that felt low-stakes but still really real.
+        <p>it’s that mix—of humor and heaviness, of performance and truth—that feels important. because even while navigating being “palatable,” black girls have always been finding ways to be seen by each other, even if it’s just in fragments, posts, and passing thoughts that say more than they seem.
       `,
       audio: 'SpotiDown.App - Let Me Be Great _Feat. Angélique Kidjo_ - Sampa the Great.mp3',
       image: 'sampa.jpg'
@@ -27,13 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
       date: '10.1.25',
       mood: 'nostalgic 🦋',
       song: 'Bossy (feat. Too $hort) – Kelis',
-      snippet: 'ngl, i was obsessed with bratz dolls...',
+      snippet: 'i was obsessed with bratz dolls...',
       content: `
-      <p>ngl, i was obsessed with bratz dolls. like, unhealthily. i’d sit on the carpet for hours, matching shoes to purses, re-braiding their hair even when it didn’t need fixing. there was something about them, their clothes, their makeup, their attitude, that felt realer to me than barbie ever did. barbie lived in a dream world; the bratz girls lived in something closer to mine.</p>
-      <p>barbie’s world felt clean and perfect — like an ad for a life i couldn’t touch. bratz had chunky boots, glitter eyeliner, and baby tees that looked like something the girls at the beauty supply store would wear. they didn’t look like me exactly, but they felt like me.</p>
-      <p>i didn’t know it at the time, but bratz were also kind of radical. they were multiracial, urban, and unapologetic in a world that told girls of color to tone it down. and still, adults called them “too grown” and “overly sexual.” like they couldn’t handle the idea of girls with lip gloss and confidence. i think that’s why i loved them more. they were bold in the way i wished i could be.</p>
-      <p>years later, when i found old bratz fan pages on tumblr and myspace, it was like nostalgia mixed with validation. people were posting pixel collages and edits of yasmin, sasha, cloe, and jade with captions like “style is power 💅🏽.” it made me realize that what some people saw as “too much” was really just a reflection of a culture that had always been full of flair and creativity.</p>
-      <p>the bratz were never the problem. the world just wasn’t ready for them.</p>
+      <p> i was obsessed with bratz dolls growing up. like, fully. i’d sit on the carpet for hours, matching shoes to purses, re-braiding their hair even when it didn’t need fixing, just because it felt satisfying. there was something about them—the clothes, the makeup, the attitude—that felt more real to me than barbie ever did. barbie lived in this polished dream world; bratz felt closer to something i could actually recognize.</p>
+      <p> barbie’s world always felt clean and untouchable, like an ad for a life i wasn’t really meant to step into. bratz, on the other hand, had chunky boots, glitter eyeliner, and baby tees that looked like something you’d see at the beauty supply store or on older girls you wanted to be like. they didn’t look exactly like me, but they felt like me in a way i didn’t really have words for back then.</p>
+      <p> i didn’t realize it at the time, but bratz were kind of radical. they were multiracial, stylish, a little messy, a little loud, and completely unapologetic in a world that was constantly telling girls of color to tone themselves down. and still, they were criticized for being “too grown” or “too sexual,” like people couldn’t handle the idea of young girls with confidence, lip gloss, and attitude. looking back, i think that’s part of why i was drawn to them so much—they were bold in a way i didn’t feel allowed to be yet.</p>
+      <p>years later, finding old bratz fan pages on tumblr and myspace felt like nostalgia and validation all at once. pixel collages, edits of yasmin, sasha, cloe, and jade, captions like “style is power 💅🏽.” it made me realize that what was once dismissed as “too much” was really just creativity, expression, and culture that had always existed, just not always recognized.</p>
+      <p>and in a way, the bratz were never the problem. the world just wasn’t ready for them.</p>
       `,
       audio: 'SpotiDown.App - Bossy _feat. Too _hort_ - Kelis.mp3',
       image: 'kelis.jpg'
@@ -95,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
       song: 'Self Love (with Ari Lennox & Bas feat. Baby Rose)',
       snippet:'i’ve been scrolling through these old posts...',
       content: `
-<p>i’ve been scrolling through these old posts and honestly, it feels like flipping through an old yearbook. like, you remember who you were, but you also see all the versions of yourself you’ve been since then the awkward, the funny, the insecure, the trying-too-hard all of it.</p>
         <p>sometimes i wonder how much of me was shaped by the internet how many of my thoughts, insecurities, even my sense of beauty came from trying to find a reflection in pixels and comment sections. and still, i wouldn’t trade it.</p>
         <p>because somewhere between the youtube tutorials, the tumblr reblogs, and the myspace surveys, i found pieces of myself i didn’t even know i was looking for. i think that’s what being a black girl online taught me that we’ve always made space out of nothing. we built whole communities from gifs and usernames.</p>
         <p>we turned “representation” into inside jokes, memes, and care posts. we taught each other how to love our curls, how to speak up, how to be soft without apology.</p>
@@ -103,12 +165,31 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>so maybe this is my way of getting back to that a digital diary that doesn’t need to be perfect, just honest.</p>
         <p>if you’ve read this far, thank you. for real.</p>
         <p>this space started out as me trying to remember who i was — but now, it feels more like a love letter to every black girl who ever felt too awkward, too loud, too soft, or too much.</p>
-        <p>you’re not.</p>
-        <p>brb,<br>🩶 — s.</p>
+      
       `,
       audio: 'SpotiDown.App - Self Love _with Ari Lennox _ Bas feat. Baby Rose_ - Dreamville.mp3',
       image: 'ari.png'
     },
+    {
+      id: 'p-4.5.26',
+      title: '4.5.26',
+      date: '4.5.26',
+      mood: 'poetic 🌸',
+      song: 'Garden Lady - Smino',
+      snippet: 'sometimes i think about how much representation really shapes the way you see yourself...',
+      content: `
+      <p> sometimes i think about how much representation really shapes the way you see yourself—not just in a “visibility matters” kind of way, but in a possibility way.</p>
+      <p>like, when the only versions of Black people you see are rooted in trauma, hyper-masculinity, or being exceptional just to be valued, it starts to feel like those are the only ways you’re allowed to exist. especially when you’re younger. it quietly limits what you think your life can look like, who you’re allowed to become.</p>
+      <p>and i don’t think we talk enough about how important it is to see Black whimsy. not just survival or strength, but softness, weirdness, imagination. the freedom to be awkward, nerdy, artistic, shy, loud, tender—all of it. to exist without having to explain yourself or turn your identity into something digestible.</p.
+      <p>because the truth is, Blackness has never been one thing. it’s never been a monolith. we’ve always been expansive, creative, layered. it’s just that not all of those versions get shown or valued the same way.</p>
+      <p>and then there’s the other layer of it—how Black culture is so often overlooked until it gets picked up and validated by white institutions. suddenly it’s “new” or “cool,” even though it’s been here, alive and evolving. that cycle of erasure and appropriation is exhausting, but it also makes moments of authentic representation feel even more important.</p>
+      <p>i think that’s why spaces that center Black whimsy matter so much. they’re not just aesthetic—they’re a kind of reclamation. a way of saying: we’ve always been here, dreaming, creating, existing beyond what you expected.</p>
+      <p>because media doesn’t just reflect reality, it shapes it. it teaches entire generations how to see themselves. and i think we deserve to see ourselves as  limitless.</p>
+      `,
+      audio: 'SpotiDown.App - Garden Lady - Smino.mp3',
+      image: 'smino.jpg'
+    }
+    
   ];
 
   /* ================ */
@@ -153,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderPosts() {
     postsContainer.innerHTML = allPosts
       .map(p => `
-        <div class='post' data-id='${p.id}'>
+        <div class='post' data-id='${p.id}' style="--rand:${Math.random()}">
           <span class='sticker'>${p.mood || ''}</span>
           <div class='title'>${escapeHtml(p.title)}</div>
           <div class='snippet'>
@@ -374,3 +455,166 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === mediaModal) mediaModal.classList.remove('open');
   });
 });
+document.addEventListener("mousemove", e => {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.style.left = e.pageX + "px";
+  sparkle.style.top = e.pageY + "px";
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(), 600);
+});
+const heartContainer = document.createElement("div");
+heartContainer.className = "heart-layer";
+document.body.appendChild(heartContainer);
+
+function spawnHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = ["💖","💅🏽","✨","🖤"][Math.floor(Math.random()*4)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (12 + Math.random()*20) + "px";
+  heart.style.animationDuration = (3 + Math.random()*4) + "s";
+
+  heartContainer.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+}
+setInterval(spawnHeart, 200);
+// PLAYLIST FUNCTION
+const player = document.getElementById("audioPlayer");
+const songs = document.querySelectorAll(".playlist li");
+const title = document.getElementById("songTitle");
+
+const playBtn = document.getElementById("playBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const stopBtn = document.getElementById("stopBtn");
+
+songs.forEach(song => {
+  song.addEventListener("click", () => {
+
+    const src = song.getAttribute("data-src");
+    const name = song.textContent;
+
+    player.src = src;
+    title.textContent = name;
+
+    player.play();
+  });
+});
+
+playBtn.onclick = () => player.play();
+pauseBtn.onclick = () => player.pause();
+
+stopBtn.onclick = () => {
+  player.pause();
+  player.currentTime = 0;
+};
+const cd = document.querySelector(".cd");
+
+player.addEventListener("play", () => {
+  document.body.classList.add("music-playing");
+});
+
+player.addEventListener("pause", () => {
+  document.body.classList.remove("music-playing");
+});
+const entrySongs = document.querySelectorAll(".entry-song");
+
+entrySongs.forEach(song => {
+
+  song.addEventListener("click", () => {
+
+    const src = song.getAttribute("data-src");
+    const titleText = song.textContent.trim();
+
+    player.src = src;
+    player.play();
+
+    document.getElementById("songTitle").textContent = titleText;
+
+  });
+
+});
+const messages = [
+  "💖 you look cute today",
+  "✨ drink water pls",
+  "💅🏽 main character energy",
+  "🖤 soft era activated"
+];
+
+function randomPopup() {
+  const msg = document.createElement("div");
+  msg.className = "popup-msg";
+  msg.textContent = messages[Math.floor(Math.random()*messages.length)];
+
+  msg.style.left = Math.random()*80 + "vw";
+  msg.style.top = Math.random()*80 + "vh";
+
+  document.body.appendChild(msg);
+
+  setTimeout(() => msg.remove(), 3000);
+}
+
+setInterval(randomPopup, 8000);
+const hoverSound = new Audio("shimmer.mp3"); // add a soft click / sparkle sound
+hoverSound.volume = 0.2;
+
+document.querySelectorAll("button, .post, .gallery-item img").forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    hoverSound.currentTime = 0;
+    hoverSound.play();
+  });
+});
+document.querySelectorAll(".gallery-item").forEach(item => {
+  const tilt = (Math.random() * 4 - 2); // -2 to +2 deg
+  item.style.transform = `rotate(${tilt}deg)`;
+  /* ============================
+   =  SPLASH + BOOT SEQUENCE  =
+   ============================ */
+
+const splash = document.getElementById("splash");
+const enterBtn = document.getElementById("enterSite");
+const bootLines = document.querySelectorAll(".boot-line");
+const splashTitle = document.getElementById("splashTitle");
+const splashSub = document.querySelector(".splash-sub");
+
+// if user already visited → skip splash
+if (localStorage.getItem("visited")) {
+  splash.style.display = "none";
+} else {
+
+  let delay = 0;
+
+  // animate boot lines one by one
+  bootLines.forEach((line) => {
+    setTimeout(() => {
+      line.style.opacity = 1;
+      line.style.animation = "typing 1s steps(20, end)";
+    }, delay);
+
+    delay += 700;
+  });
+
+  // after boot finishes → show title + button
+  setTimeout(() => {
+    splashTitle.style.display = "block";
+    splashSub.style.display = "block";
+
+    enterBtn.classList.remove("hidden");
+  }, delay + 500);
+}
+
+// enter button → fade out splash
+enterBtn.addEventListener("click", () => {
+  splash.classList.add("fade-out");
+
+  setTimeout(() => {
+    splash.style.display = "none";
+  }, 800); // match CSS fade duration
+
+  localStorage.setItem("visited", "true");
+});
+});
+
