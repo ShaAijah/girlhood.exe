@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Gloria+Hallelujah&display=swap');
 
+* {
+  box-sizing: border-box;
+}
 body {
-  background-color: #000;
+  background: url('ground.avif');
+  background-size: cover;
+  background-attachment: fixed;
   font-family: 'pixelify sans', sans-serif;
   color: #fff0f8;
   min-height: 100vh;
@@ -20,7 +25,7 @@ header {
   left: 0;
   width: 100%;       
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.9); 
+  background: rgba(0, 0, 0, 0.612); 
   backdrop-filter: blur(4px); 
   box-shadow: 0 0 20px #ff69b4;
   border-bottom: 2px solid #ff69b4;
@@ -92,11 +97,15 @@ header .title {
   padding-left: 30px
 }
 .character-slider {
-  display: flex;
+ display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 12px;
+  width: 100%;
+  max-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .arrow-btn {
@@ -113,7 +122,16 @@ header .title {
 }
 .arrow-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 15px #fff, 0 0 25px #ff69b4 inset;
+  box-shadow:
+    0 0 14px #ff69b4,
+    0 0 22px #ffb6c1,
+    inset 0 0 6px #fff;
+}
+.arrow-btn:active {
+  transform: scale(0.92);
+  box-shadow:
+    inset 0 0 8px #ff69b4,
+    0 0 8px #ffb6c1;
 }
 
 .character-option:hover {
@@ -130,7 +148,32 @@ header .title {
   align-items: center;
   margin-top: 8px;
   margin-left: 10px;
+  transition: transform 0.2s ease;
 }
+
+.current-avatar.out {
+  transform: scale(0.85);
+  opacity: 0.4;
+}
+
+.current-avatar.in {
+  animation: avatarPop 0.35s ease;
+}
+
+@keyframes avatarPop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .current-avatar img {
   width: 150px;
   height: 150px;
@@ -138,6 +181,15 @@ header .title {
   border: 3px solid #fff;
   box-shadow: 0 0 20px #ff69b4, inset 0 0 6px #fff;
   object-fit: cover;
+   animation: avatarGlow 3s infinite alternate;
+}
+@keyframes avatarGlow {
+  from {
+    filter: drop-shadow(0 0 6px #ff69b4);
+  }
+  to {
+    filter: drop-shadow(0 0 14px #ffb6c1);
+  }
 }
 #characterName {
   margin-top: 6px;
@@ -166,6 +218,22 @@ header .title {
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  transform: rotate(calc(-1deg + 2deg * var(--rand)));
+}
+/* floating sticker effect */
+.post::after {
+  content: "✨";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 14px;
+  opacity: 0.8;
+  animation: floaty 2s infinite ease-in-out alternate;
+}
+@keyframes floaty {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-6px); }
 }
 .post:hover {
   transform: scale(1.05);
@@ -209,12 +277,23 @@ header .title {
   text-shadow: 0 0 8px #ffb6c1;
 }
 .player {
-  width: 220px;
-  height: 32px;
-  border-radius: 8px;
-  filter: drop-shadow(0 0 6px #ff69b4);
-  accent-color: #ff69b4;
-  background: linear-gradient(90deg, #ff7acb 0%, #ffa2d8 100%);
+ margin-top: 6px;
+  padding: 12px;
+  border: 2px solid #ff69b4;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,192,203,0.6),
+    rgba(255,105,180,0.3)
+  );
+
+  box-shadow:
+    0 0 10px #ff69b4,
+    inset 0 0 6px white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Modal */
@@ -388,8 +467,10 @@ body, button, a, input, textarea {
   margin-bottom: 14px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(199,159,255,0.18);
-  background: #fff0;
+ background: #111;
+  padding: 6px;
+  border: 2px solid white;
+  box-shadow: 0 0 12px #ff69b4;
 }
 
 .gallery-item img {
@@ -434,5 +515,383 @@ marquee {
 .bling-frame img:hover {
   transform: scale(1.02);
   opacity: 0.95;
+}
+
+/* --------------------------- */
+/* PLAYLIST PLAYER */
+/* --------------------------- */
+
+.playlist-card {
+  margin-top: 20px;
+  text-align: center;
+  padding: 14px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.playlist {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.playlist li {
+  padding: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+
+  border: 1px solid hotpink;
+  border-radius: 8px;
+
+  background: rgba(255,105,180,0.15);
+
+  box-shadow:
+    0 0 8px #ff69b4,
+    inset 0 0 4px white;
+
+  transition: all .2s ease;
+}
+
+.playlist li:hover {
+  transform: scale(1.05);
+  background: rgba(255,105,180,0.3);
+}
+
+/* --------------------------- */
+/* CUSTOM AUDIO PLAYER */
+/* --------------------------- */
+
+.player-screen {
+  font-size: 12px;
+  padding: 6px;
+  margin-bottom: 8px;
+  
+
+   background: linear-gradient(
+    180deg,
+    rgba(255,192,203,0.6),
+    rgba(255,105,180,0.3)
+  );
+  border-radius: 6px;
+
+   box-shadow:
+    0 0 10px #ff69b4,
+    inset 0 0 6px white;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.player-controls button {
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid hotpink;
+  border-radius: 50%;
+
+  background: radial-gradient(circle, #ffb6d9, #ff69b4);
+
+  box-shadow:
+    0 0 6px #ff69b4,
+    inset 0 0 4px white;
+
+  cursor: pointer;
+  font-size: 14px;
+
+  transition: transform 0.2s;
+}
+
+.player-controls button:hover {
+  transform: scale(1.1);
+}
+
+/* --------------------------- */
+/* SPINNING CD */
+/* --------------------------- */
+
+.cd {
+  font-size: 32px;
+  margin-bottom: 6px;
+
+  display: inline-block;
+
+  animation: spin 4s linear infinite;
+  animation-play-state: paused;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------- */
+/* ENTRY MUSIC */
+/* --------------------------- */
+
+.entry-music {
+  margin-top: 10px;
+}
+
+.entry-song {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 6px 10px;
+  margin: 6px 0;
+
+  border: 1px solid hotpink;
+  border-radius: 8px;
+
+  background: rgba(255,105,180,0.15);
+
+  box-shadow:
+    0 0 8px #ff69b4,
+    inset 0 0 4px white;
+
+  font-size: 13px;
+
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.entry-song:hover {
+  transform: scale(1.02);
+  background: rgba(255,105,180,0.3);
+}
+
+.song-icon {
+  margin-right: 6px;
+}
+
+.play-entry {
+  border: none;
+  background: hotpink;
+  color: white;
+  border-radius: 50%;
+
+  width: 22px;
+  height: 22px;
+
+  cursor: pointer;
+}
+#audioPlayer {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.sidebar-player {
+  width: 100%;
+  margin-top: 10px;
+}
+.sparkle{
+position:absolute;
+width:6px;
+height:6px;
+background:#ff69b4;
+border-radius:50%;
+pointer-events:none;
+animation:sparkleFade .6s linear forwards;
+}
+
+@keyframes sparkleFade{
+0%{opacity:1;transform:scale(1)}
+100%{opacity:0;transform:scale(0)}
+}
+.divider{
+text-align:center;
+margin:20px 0;
+font-size:18px;
+letter-spacing:10px;
+text-shadow:0 0 10px #ff69b4;
+}
+.card {
+  background: rgba(255,192,203,0.25);
+  border: 2px solid #ff69b4;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow:
+    0 0 15px #ff69b4,
+    inset 0 0 8px #fff;
+  margin-bottom: 20px;
+}
+.glitch {
+  animation: glitch 1.5s infinite;
+}
+
+@keyframes glitch {
+  0%, 100% { text-shadow: 0 0 5px #ff69b4; }
+  50% { text-shadow: 2px 0 #00fff7, -2px 0 #ff00c8; }
+}
+.music-playing {
+  animation: bgPulse 4s infinite alternate;
+}
+
+@keyframes bgPulse {
+  from { background-color: #000; }
+  to { background-color: #1a0014; }
+}
+.heart-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  top: -20px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+.popup-msg {
+  position: fixed;
+  padding: 6px 10px;
+  background: rgba(255,105,180,0.9);
+  border: 1px solid white;
+  border-radius: 8px;
+  font-size: 12px;
+  box-shadow: 0 0 10px #ff69b4;
+  animation: fadePop 3s forwards;
+  z-index: 1000;
+}
+
+@keyframes fadePop {
+  0% { opacity: 0; transform: scale(.8); }
+  20% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+.blinkie-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: black; /* or match your site */
+  border-top: 2px solid hotpink;
+  border-bottom: 2px solid hotpink;
+  padding: 5px 0;
+   box-shadow:
+    0 0 8px #ff69b4,
+    inset 0 0 4px white;
+}
+
+.blinkie-track {
+  display: flex;
+  width: max-content;
+  animation: scrollBlinkies 20s linear infinite;
+}
+
+.blinkie {
+  height: 25px;
+  margin-right: 10px;
+  image-rendering: pixelated;
+}
+
+/* smooth infinite scroll */
+@keyframes scrollBlinkies {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+#splash {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #1a0014, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+/* subtle animated background glow */
+#splash::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #ff69b4 0%, transparent 60%);
+  opacity: 0.15;
+  animation: pulse 6s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+.splash-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.splash-sub {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ENTER BUTTON */
+.enter-btn {
+  margin-top: 25px;
+  padding: 10px 18px;
+  background: black;
+  border: 1px solid #ff69b4;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 0 10px #ff69b4;
+  transition: all 0.3s;
+}
+
+.enter-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff69b4;
+}
+
+/* fade out */
+.fade-out {
+  animation: fadeOut 0.8s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.boot-screen {
+  font-family: monospace;
+  color: #ffb6d9;
+  text-align: left;
+  width: 300px;
+}
+
+.boot-line {
+ opacity: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #ff69b4;
+  width: 0;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+.enter-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
