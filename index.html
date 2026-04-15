@@ -3,21 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>#Blerd Archive ✨</title>
+  <title>girlhood.exe✨</title>
   <meta name="description" content="A Y2K MySpace-inspired diary celebrating Black girlhood and self-expression."/>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header>
-  <h1 class="title">#Blerd Archive✨</h1>
-    <p>✨ Welcome to the Archive of Black Girlhood ✨ Made with glitter & love ✨</p>
+ <h1 class="title glitch">girlhood.exe✨</h1>
   </div>
+  <div class="blinkie-marquee">
+  <div class="blinkie-track">
+    <img src="queen.gif" class="blinkie">
+    <img src="princess.gif" class="blinkie">
+    <img src="queen.gif" class="blinkie">
+    <img src="princess.gif" class="blinkie">
+
+    <!-- duplicate for seamless loop -->
+    <img src="queen.gif" class="blinkie">
+    <img src="princess.gif" class="blinkie">
+    <img src="queen.gif" class="blinkie">
+    <img src="princess.gif" class="blinkie">
+  </div>
+</div>
   <button class="btn" id="newPostBtn">+ New Entry</button>
 </header>
 
 <section class="profile">
   <!-- Character sidebar -->
   <aside class="card avatar-wrap">
+
     <h3 class="handwritten">Choose Your Character ✨</h3>
 
     <div class="character-slider">
@@ -28,10 +42,33 @@
       </div>
       <button class="arrow-btn" id="nextChar">⟶</button>
     </div>
+
+  <ul class="playlist">
+    <li data-src="SpotiDown.App - Bossy _feat. Too _hort_ - Kelis.mp3">🎧 Kelis – Bossy</li>
+    <li data-src="SpotiDownloader.com - Don't Touch My Hair (feat. Sampha) - Solange.mp3">🎧 Solange – Don't Touch My Hair</li>
+    <li data-src="SpotiDown.App - Electric Lady _feat. Solange_ - Janelle Monáe.mp3">🎧 Janelle Monáe – Electric Lady</li>
+    <li data-src="SpotiDown.App - Video Girl - FKA twigs.mp3">🎧 FKA twigs – Video Girl</li>
+    <li data-src="SpotiDown.App - Let Me Be Great _Feat. Angélique Kidjo_ - Sampa the Great.mp3">🎧 Sampa the Great – Let Me Be Great</li>
+  </ul>
+
+<div class="player">
+
+  <div class="player-screen">💿 Now Playing: <span id="songTitle">None</span></div>
+
+  <div class="player-controls">
+    <button id="playBtn">▶</button>
+    <button id="pauseBtn">⏸</button>
+    <button id="stopBtn">⏹</button>
+  </div>
+
+  <audio id="audioPlayer"></audio>
+</div>
+</div>
   </aside>
 
   <main>
     <div class="card">
+      <div class="divider">✦ ✦ ✦ ✦ ✦</div>
       <p class="muted">Click any entry to open it...</p>
       <div id="posts" class="posts" aria-live="polite"></div>
     </div>
@@ -91,6 +128,16 @@ Supported by On She Goes. Hairnah.com. https://hairnah.com/
     <div class="gallery-item">
       <img src="awk.gif" alt="Issa Rae Awkward Black girl blinkie">
     </div>
+
+    <div class="gallery-item">
+      <img src="tlc.webp" alt="TLC">
+    </div>
+    </div>
+    <div class="gallery-item">
+      <img src="TLC.gif" alt="TLC blinkie">
+    </div>
+
+  
   </div>
 </section>
 
@@ -101,7 +148,6 @@ Supported by On She Goes. Hairnah.com. https://hairnah.com/
 <!-- Diary Modal -->
 <div id="modal" class="modal" role="dialog" aria-modal="true">
   <div class="sheet">
-    <button id="closeModal" class="btn muted" style="float:right">Close ✦</button>
     <div id="sheetContent"></div>
   </div>
 </div>
@@ -132,48 +178,31 @@ Supported by On She Goes. Hairnah.com. https://hairnah.com/
 </div>
 
 <script src="apps.js"></script>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=21 height=604 style='position:absolute; left:40%; top:14px; width:20; height:604px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=3 scrolldelay=14 height=575 style='position:absolute; left:84%; top:49px; width:20; height:575px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=1 scrolldelay=6 height=589 style='position:absolute; left:28%; top:93px; width:20; height:589px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=44 height=658 style='position:absolute; left:56%; top:44px; width:20; height:658px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=1 scrolldelay=8 height=522 style='position:absolute; left:88%; top:6px; width:20; height:522px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=1 scrolldelay=10 height=600 style='position:absolute; left:9%; top:102px; width:20; height:600px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=48 height=668 style='position:absolute; left:17%; top:133px; width:20; height:668px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=27 height=546 style='position:absolute; left:86%; top:194px; width:20; height:546px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=5 scrolldelay=45 height=542 style='position:absolute; left:37%; top:145px; width:20; height:542px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=9 height=619 style='position:absolute; left:26%; top:161px; width:20; height:619px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=5 scrolldelay=49 height=523 style='position:absolute; left:83%; top:143px; width:20; height:523px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=4 scrolldelay=35 height=504 style='position:absolute; left:43%; top:150px; width:20; height:504px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=12 height=677 style='position:absolute; left:69%; top:109px; width:20; height:677px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=50 height=626 style='position:absolute; left:51%; top:74px; width:20; height:626px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=47 height=549 style='position:absolute; left:61%; top:111px; width:20; height:549px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=5 height=614 style='position:absolute; left:70%; top:194px; width:20; height:614px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=32 height=547 style='position:absolute; left:5%; top:153px; width:20; height:547px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=5 height=566 style='position:absolute; left:55%; top:84px; width:20; height:566px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=20 height=641 style='position:absolute; left:9%; top:152px; width:20; height:641px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=1 scrolldelay=31 height=510 style='position:absolute; left:34%; top:191px; width:20; height:510px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=5 scrolldelay=10 height=597 style='position:absolute; left:68%; top:194px; width:20; height:597px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=1 scrolldelay=43 height=546 style='position:absolute; left:47%; top:21px; width:20; height:546px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=1 scrolldelay=30 height=577 style='position:absolute; left:95%; top:118px; width:20; height:577px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=4 scrolldelay=33 height=690 style='position:absolute; left:54%; top:128px; width:20; height:690px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=3 scrolldelay=17 height=516 style='position:absolute; left:12%; top:168px; width:20; height:516px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=5 scrolldelay=23 height=557 style='position:absolute; left:8%; top:6px; width:20; height:557px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=8 height=632 style='position:absolute; left:72%; top:64px; width:20; height:632px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=40 height=620 style='position:absolute; left:7%; top:174px; width:20; height:620px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=4 scrolldelay=47 height=551 style='position:absolute; left:62%; top:28px; width:20; height:551px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=28 height=672 style='position:absolute; left:47%; top:78px; width:20; height:672px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=40 height=532 style='position:absolute; left:39%; top:44px; width:20; height:532px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=9 height=668 style='position:absolute; left:50%; top:136px; width:20; height:668px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=34 height=511 style='position:absolute; left:84%; top:51px; width:20; height:511px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=3 scrolldelay=46 height=690 style='position:absolute; left:57%; top:148px; width:20; height:690px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=16 height=605 style='position:absolute; left:90%; top:70px; width:20; height:605px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=10 height=669 style='position:absolute; left:13%; top:178px; width:20; height:669px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=2 scrolldelay=8 height=597 style='position:absolute; left:35%; top:118px; width:20; height:597px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=22 height=582 style='position:absolute; left:10%; top:36px; width:20; height:582px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=3 scrolldelay=35 height=620 style='position:absolute; left:80%; top:82px; width:20; height:620px;'><font color=#cc3399>♥</font></marquee>
-<marquee behavior=scroll direction=down scrollamount=4 scrolldelay=10 height=630 style='position:absolute; left:40%; top:2px; width:20; height:630px;'><font color=#cc3399>♥</font></marquee>
-
 
 </body>
-</html>
+<div id="splash">
+  <div class="splash-content">
 
+    <div class="boot-screen" id="bootScreen">
+      <div class="boot-line">initializing archive...</div>
+      <div class="boot-line">loading memories...</div>
+      <div class="boot-line">restoring softness...</div>
+      <div class="boot-line">entering girlhood.exe</div>
+    </div>
+
+    <h1 class="glitch" id="splashTitle" style="display:none;">
+      ✨ Archive of Black Girlhood ✨
+    </h1>
+
+    <p class="splash-sub" style="display:none;">
+      a digital diary of memory, media, and girlhood 💿
+    </p>
+
+    <button id="enterSite" class="enter-btn hidden">
+      enter ✦
+    </button>
+
+  </div>
+</div>
+</div>
+</html>
