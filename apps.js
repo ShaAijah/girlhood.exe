@@ -1,46 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /* ============================
-     =  SPLASH + BOOT SEQUENCE  =
-     ============================ */
+ /* ============================
+   =  SPLASH + BOOT SEQUENCE  =
+   ============================ */
 
-  const splash = document.getElementById("splash");
-  const enterBtn = document.getElementById("enterSite");
-  const bootLines = document.querySelectorAll(".boot-line");
-  const splashTitle = document.getElementById("splashTitle");
-  const splashSub = document.querySelector(".splash-sub");
+const splash = document.getElementById("splash");
+const enterBtn = document.getElementById("enterSite");
+const bootLines = document.querySelectorAll(".boot-line");
+const splashTitle = document.getElementById("splashTitle");
+const splashSub = document.querySelector(".splash-sub");
 
-  if (splash && enterBtn) {
+if (splash && enterBtn) {
 
-    if (localStorage.getItem("visited")) {
+  let delay = 0;
+
+  // boot animation
+  bootLines.forEach((line) => {
+    setTimeout(() => {
+      line.style.opacity = 1;
+      line.style.animation = "typing 1s steps(20, end)";
+    }, delay);
+
+    delay += 700;
+  });
+
+  // reveal title + enter button
+  setTimeout(() => {
+    splashTitle.style.display = "block";
+    splashSub.style.display = "block";
+    enterBtn.classList.remove("hidden");
+  }, delay + 500);
+
+  // enter site
+  enterBtn.addEventListener("click", () => {
+    splash.classList.add("fade-out");
+
+    setTimeout(() => {
       splash.style.display = "none";
-    } else {
-      let delay = 0;
-
-      bootLines.forEach((line) => {
-        setTimeout(() => {
-          line.style.opacity = 1;
-          line.style.animation = "typing 1s steps(20, end)";
-        }, delay);
-        delay += 700;
-      });
-
-      setTimeout(() => {
-        splashTitle.style.display = "block";
-        splashSub.style.display = "block";
-        enterBtn.classList.remove("hidden");
-      }, delay + 500);
-    }
-
-    enterBtn.addEventListener("click", () => {
-      splash.classList.add("fade-out");
-
-      setTimeout(() => {
-        splash.style.display = "none";
-      }, 800);
-
-      localStorage.setItem("visited", "true");
-    });
-  }
+    }, 800);
+  });
+}
   const glitchTargets = document.querySelectorAll(
   ".title, .gallery-section h2, .avatar-wrap h3, header p"
 );
@@ -570,50 +568,5 @@ document.querySelectorAll("button, .post, .gallery-item img").forEach(el => {
 document.querySelectorAll(".gallery-item").forEach(item => {
   const tilt = (Math.random() * 4 - 2); // -2 to +2 deg
   item.style.transform = `rotate(${tilt}deg)`;
-  /* ============================
-   =  SPLASH + BOOT SEQUENCE  =
-   ============================ */
-
-const splash = document.getElementById("splash");
-const enterBtn = document.getElementById("enterSite");
-const bootLines = document.querySelectorAll(".boot-line");
-const splashTitle = document.getElementById("splashTitle");
-const splashSub = document.querySelector(".splash-sub");
-
-// if user already visited → skip splash
-if (localStorage.getItem("visited")) {
-  splash.style.display = "none";
-} else {
-
-  let delay = 0;
-
-  // animate boot lines one by one
-  bootLines.forEach((line) => {
-    setTimeout(() => {
-      line.style.opacity = 1;
-      line.style.animation = "typing 1s steps(20, end)";
-    }, delay);
-
-    delay += 700;
-  });
-
-  // after boot finishes → show title + button
-  setTimeout(() => {
-    splashTitle.style.display = "block";
-    splashSub.style.display = "block";
-
-    enterBtn.classList.remove("hidden");
-  }, delay + 500);
-}
-
-// enter button → fade out splash
-enterBtn.addEventListener("click", () => {
-  splash.classList.add("fade-out");
-
-  setTimeout(() => {
-    splash.style.display = "none";
-  }, 800); // match CSS fade duration
-
-  localStorage.setItem("visited", "true");
-});
+  
 });
